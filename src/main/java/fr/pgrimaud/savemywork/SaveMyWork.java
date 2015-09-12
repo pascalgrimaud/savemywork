@@ -10,23 +10,65 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class SaveMyWork {
 
+    /**
+     * Main method
+     *
+     * @param args
+     */
     public static void main(String[] args) {
-        if (args != null && args.length >= 2 && args[0] != null && args[1] != null) {
-            // check the first argument
-            try {
-                Integer time = Integer.valueOf(args[0]);
-                startSave(args, time);
-            } catch (NumberFormatException ex) {
-                displaySyntax();
-            }
-        } else {
+        if (!checkArgs(args)) {
             displaySyntax();
+            System.exit(0);
         }
+        startSaveMyWork(args, Integer.valueOf(args[0]));
     }
 
-    public static void startSave(String[] args, Integer time) {
+    /**
+     * Method to check the arguments
+     *
+     * @param args
+     * @return true if the arguments are correct
+     */
+    public static boolean checkArgs(String[] args) {
+        if (args != null && args.length >= 2 && args[0] != null && args[1] != null) {
+            try {
+                Integer.valueOf(args[0]);
+                for (int i = 1; i < args.length; i++) {
+                    if (!Files.exists(Paths.get(args[i]))) {
+                        return false;
+                    }
+                }
+            } catch (NumberFormatException ex) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Method to display the syntax
+     */
+    public static void displaySyntax() {
+        System.out.println("Syntax :");
+        System.out.println("  java -jar SaveMyWork.jar <time in minutes> <file1> [file2] [...]");
+        System.out.println("Examples :");
+        System.out.println("  java -jar SaveMyWork.jar 10 /home/dev/test.doc /home/dev/test.xls");
+    }
+
+    /**
+     * Method to start the save job
+     *
+     * @param args
+     * @param time
+     */
+    public static void startSaveMyWork(String[] args, Integer time) {
         System.out.println("Starting SaveMyWork...");
         try {
             SchedulerFactory sf = new StdSchedulerFactory();
@@ -47,15 +89,5 @@ public class SaveMyWork {
         } catch (SchedulerException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Method to display the syntax
-     */
-    public static void displaySyntax() {
-        System.out.println("Syntax :");
-        System.out.println("  java -jar SaveMyWork.jar <time in minutes> <file1> [file2] [...]");
-        System.out.println("Examples :");
-        System.out.println("  java -jar SaveMyWork.jar 10 /home/dev/test.doc /home/dev/test.xls");
     }
 }

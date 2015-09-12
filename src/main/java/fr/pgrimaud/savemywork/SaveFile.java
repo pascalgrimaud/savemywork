@@ -41,7 +41,7 @@ public class SaveFile implements Job {
                     e.printStackTrace();
                 }
             } else {
-                System.out.println("Error - The file doesn't exist : " + args[i]);
+                System.out.println("Error - The file doesn't exist anymore : " + args[i]);
             }
         }
     }
