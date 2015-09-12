@@ -1,4 +1,4 @@
-![https://travis-ci.org/pascalgrimaud/savemywork](https://travis-ci.org/pascalgrimaud/savemywork.svg)
+[![Build Status](https://travis-ci.org/pascalgrimaud/savemywork.svg?branch=master)](https://travis-ci.org/pascalgrimaud/savemywork)
 
 
 
