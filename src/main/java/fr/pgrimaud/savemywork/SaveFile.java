@@ -1,6 +1,5 @@
 package fr.pgrimaud.savemywork;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,7 +12,7 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 /**
- * Classe permettant de réaliser des sauvegardes régulières automatique
+ * Class to auto save files
  *
  * @author pgrimaud
  */
@@ -28,17 +27,16 @@ public class SaveFile implements Job {
         java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat(format);
 
         for (int i = 1; i < args.length; i++) {
-            String fichier = args[i];
+            String file = args[i];
             String dateString = formater.format(new Date());
-            String fichierDest = fichier + '.' + dateString;
-//            File testFichier = new File(fichier);
-            Path base = Paths.get(fichier);
-            if (Files.exists(base)) {
+            String fileDest = file + '.' + dateString;
 
-                Path dest = Paths.get(fichierDest);
+            Path base = Paths.get(file);
+            if (Files.exists(base)) {
+                Path dest = Paths.get(fileDest);
                 try {
                     Files.copy(base, dest);
-                    System.out.println("Copy : " + fichierDest);
+                    System.out.println("Copy : " + fileDest);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
