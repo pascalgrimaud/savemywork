@@ -10,34 +10,23 @@ import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-
 public class SaveMyWork {
 
     public static void main(String[] args) {
-        if (args == null || args.length < 2) {
-            displaySyntax();
-        }
-        // check the first argument
-        Integer time = 0;
-        try {
-            time = Integer.valueOf(args[0]);
-            if (time <= 0) {
+        if (args != null && args.length >= 2 && args[0] != null && args[1] != null) {
+            // check the first argument
+            try {
+                Integer time = Integer.valueOf(args[0]);
+                startSave(args, time);
+            } catch (NumberFormatException ex) {
                 displaySyntax();
             }
-        } catch (NumberFormatException ex) {
+        } else {
             displaySyntax();
         }
+    }
 
-        // check all the rest of argument, if the file exists
-        for (int i = 1; i < args.length; i++) {
-            if (!Files.exists(Paths.get(args[i]))) {
-                System.out.println("Error - The file doesn't exist : " + args[i]);
-                System.exit(0);
-            }
-        }
-
+    public static void startSave(String[] args, Integer time) {
         System.out.println("Starting SaveMyWork...");
         try {
             SchedulerFactory sf = new StdSchedulerFactory();
@@ -68,6 +57,5 @@ public class SaveMyWork {
         System.out.println("  java -jar SaveMyWork.jar <time in minutes> <file1> [file2] [...]");
         System.out.println("Examples :");
         System.out.println("  java -jar SaveMyWork.jar 10 /home/dev/test.doc /home/dev/test.xls");
-        System.exit(0);
     }
 }
