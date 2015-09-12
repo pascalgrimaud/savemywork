@@ -1,3 +1,7 @@
+![https://travis-ci.org/pascalgrimaud/savemywork](https://travis-ci.org/pascalgrimaud/savemywork.svg)
+
+
+
 # Information
 
 When you work on a document file (example : document.doc), SaveMyWork
@@ -5,6 +9,7 @@ will automatically save your file every X minutes. The save file will
 be in the same directory as the original file.
 
 This is used to avoid losing all your work when the file crashes or is corrupted...
+
 
 
 # Build with maven
