@@ -35,7 +35,7 @@ public class SaveMyWork {
      * @return true if the arguments are correct
      */
     public static boolean checkArgs(String[] args) {
-        if (args != null && args.length >= 2 && args[0] != null && args[1] != null) {
+        if (args != null && args.length >= 2 ) {
             try {
                 Integer.valueOf(args[0]);
                 for (int i = 1; i < args.length; i++) {

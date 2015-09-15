@@ -36,13 +36,13 @@ public class TestSaveMyWork {
 
     @Test
     public void testCheckArgsBadSecondFile() {
-        String args[] = {"1", ".//src//test//resources//tmp//test.txt", "test.txt"};
+        String args[] = {"1", "./src/test/resources/tmp/test.txt", "test.txt"};
         Assert.assertFalse(SaveMyWork.checkArgs(args));
     }
 
     @Test
     public void testCheckArgsCorrect() {
-        String args[] = {"1", ".//src//test//resources//tmp//test.txt"};
+        String args[] = {"1", "./src/test/resources/tmp/test.txt"};
         Assert.assertTrue(SaveMyWork.checkArgs(args));
     }
 }
