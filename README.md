@@ -17,7 +17,7 @@ This is used to avoid losing all your work when the file crashes or is corrupted
 ### Requirements
 
 * Java 7+
-* Maven 3
+* Maven 3+
 
 
 ### Generate the jar
