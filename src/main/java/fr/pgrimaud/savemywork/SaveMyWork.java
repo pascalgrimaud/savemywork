@@ -75,12 +75,12 @@ public class SaveMyWork {
             Scheduler scheduler = sf.getScheduler();
 
             // define the job
-            JobDetail job = JobBuilder.newJob(SaveFile.class)
-                    .withIdentity("job", "group").build();
+            JobDetail job = JobBuilder.newJob(SaveFile.class).withIdentity("job", "group").build();
             job.getJobDataMap().put("args", args);
             Trigger trigger = TriggerBuilder
                     .newTrigger()
-                    .withSchedule(SimpleScheduleBuilder.simpleSchedule().withIntervalInSeconds(time * 60).repeatForever())
+                    .withSchedule(SimpleScheduleBuilder.simpleSchedule()
+                            .withIntervalInSeconds(time * 60).repeatForever())
                     .build();
 
             // Tell quartz to schedule the job using our trigger
